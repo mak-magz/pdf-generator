@@ -27,7 +27,7 @@ func usage() {
 }
 
 var (
-	addr     = flag.String("addr", "localhost:8080", "address to serve")
+	addr = flag.String("addr", "localhost:8080", "address to serve")
 )
 
 func main() {
@@ -44,6 +44,7 @@ func main() {
 	router := router.SetupRouter()
 
 	router.LoadHTMLGlob("pkg/templates/*")
+	router.Static("/pkg/templates", "./pkg/templates")
 
 	srv := &http.Server{
 		Addr:    *addr,

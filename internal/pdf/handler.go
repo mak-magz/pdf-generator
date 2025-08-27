@@ -1,6 +1,7 @@
 package pdf
 
 import (
+	"encoding/base64"
 	"fmt"
 	"html"
 	"log"
@@ -38,13 +39,18 @@ func GeneratePDF(c *gin.Context) {
 		log.Fatal(err.Error())
 	}
 
-	err = doc.Save("files/pdf/sample.pdf")
+	// Get PDF bytes using GetBytes()
+	pdfBytes := doc.GetBytes()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	c.HTML(http.StatusOK, "pdf.html", gin.H{})
+	// Encode PDF bytes to base64
+	pdfBase64 := base64.StdEncoding.EncodeToString(pdfBytes)
 
+	c.HTML(http.StatusOK, "pdf.html", gin.H{
+		"pdfData": pdfBase64,
+	})
 }
 
 func GetMaroto() core.Maroto {
