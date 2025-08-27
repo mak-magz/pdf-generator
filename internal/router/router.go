@@ -11,6 +11,7 @@ func SetupRouter() *gin.Engine {
 	greeter := pdf.Greet
 
 	router.GET("/", greeter)
+	router.GET("/pdf", pdf.GeneratePDF)
 
 	return router
 }
