@@ -32,7 +32,7 @@
             "--signal" "SIGHUP"
             "-w" "."
             "-e" "go,html"
-            "-x" "go run server.go -addr localhost:$PORT"
+            "-x" "go run cmd/pdf-generator/server.go -addr localhost:$PORT"
           ];
           manager = "web";
         };
